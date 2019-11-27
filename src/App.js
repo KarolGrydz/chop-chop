@@ -1,25 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container, FormControl, InputLabel, Input } from '@material-ui/core';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <FormControl>
+        <InputLabel htmlFor="username">username</InputLabel>
+        <Input id="username" />
+
+        <InputLabel htmlFor="password">password</InputLabel>
+        <Input id="password" />
+      </FormControl>
+    </Container>
   );
 }
 
