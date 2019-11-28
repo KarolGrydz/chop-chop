@@ -1,18 +1,17 @@
 import React from 'react';
-import { Container, FormControl, InputLabel, Input } from '@material-ui/core';
+import { Container, Col, Row } from 'reactstrap';
+import { Login } from './views/Login';
+import './styles/App.css';
 
-function App() {
+export const App = () => {
   return (
-    <Container maxWidth="sm">
-      <FormControl>
-        <InputLabel htmlFor="username">username</InputLabel>
-        <Input id="username" />
-
-        <InputLabel htmlFor="password">password</InputLabel>
-        <Input id="password" />
-      </FormControl>
+    <Container fluid={true}>
+      <Row className='justify-content-center'>
+        <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
+          <h2>Simple Web App</h2>
+          <Login />
+        </Col>
+      </Row>
     </Container>
   );
-}
-
-export default App;
+};
