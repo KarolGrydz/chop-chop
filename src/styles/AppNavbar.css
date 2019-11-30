@@ -1,0 +1,16 @@
+.navbar {
+  width: 100% !important;
+}
+
+.nav {
+  width: 100% !important;
+}
+
+.nav h3 {
+  text-align: center;
+  padding-right: 16vw;
+}
+
+.nav img {
+  border: 1px solid black;
+}

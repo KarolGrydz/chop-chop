@@ -1,35 +1,38 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, Nav, NavItem, Row, Col } from 'reactstrap';
 import { Login } from './Login';
 import { Dashboard } from './Dashboard';
 
+import '../styles/AppNavbar.css';
+
 export const AppNavbar = props => {
   return (
-    <Router>
-      <div>
-        <Navbar expand="md">
-          <Nav>
+    <Row>
+      <Navbar>
+        <Nav>
+          <Col>
             <NavItem>
-              <Link to="/">Home</Link>
+              <img alt='img'></img>
             </NavItem>
+          </Col>
+          <Col>
+            <NavItem>
+              <Link to='/'>Home</Link>
+            </NavItem>
+          </Col>
+          <Col sm={{ size: '8' }} md={{ size: '8' }}>
             <NavItem>
               <h3>Simple Web App</h3>
             </NavItem>
+          </Col>
+          <Col>
             <NavItem>
-              <Link to="/Login">Logout</Link>
+              <Link to='/Login'>Logout</Link>
             </NavItem>
-          </Nav>
-        </Navbar>
-        <Switch>
-          <Route path="/Login">
-            <Login />
-          </Route>
-          <Route path="/Login">
-            <Dashboard />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          </Col>
+        </Nav>
+      </Navbar>
+    </Row>
   );
 };
