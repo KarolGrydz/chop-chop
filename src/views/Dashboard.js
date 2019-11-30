@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { Navbar } from './Navbar';
+import { AppNavbar } from './AppNavbar';
 
 export const Dashboard = () => {
   return (
     <Fragment>
-      <Navbar />
+      <AppNavbar />
       <div>Dashborad</div>
     </Fragment>
   );
