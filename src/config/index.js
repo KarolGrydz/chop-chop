@@ -1,22 +1,31 @@
 import axios from 'axios';
 
-export const baseURL = '​https://edu-api.chop-chop.org/posts';
-export const posts = `${baseURL}posts`;
-
-const reqHeaders = {
-  headers: {
-    'X-Token':
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFwcGRldiIsInRpbWUiOjE1NzUxMzIzNjN9.O_Id-FxYuTa0oxNG2DpX3r7aXDqIvr0QUIGV35--VCw'
-  }
-};
+const baseURL = 'https://edu-api.chop-chop.org/';
+const postsURL = `${baseURL}posts`;
+const authURL = `${baseURL}auth`;
 
 export const getPosts = async () => {
   try {
+    const token = await getToken().then(({ data }) => data.token);
     const result = await axios
-      .get(baseURL, Object.assign({}, reqHeaders))
-      .then(data => console.log(data));
+      .get(postsURL, {
+        headers: {
+          'X-Token': token
+        }
+      })
+      .then(data => data);
     return result;
   } catch (error) {
     console.log(error);
   }
+};
+
+const getToken = async () => {
+  const token = await axios
+    .post(authURL, {
+      username: 'appdev',
+      password: 'ih^ZWK06%Y'
+    })
+    .then(({ data }) => data);
+  return token;
 };
