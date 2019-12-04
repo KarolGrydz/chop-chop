@@ -1,0 +1,21 @@
+.card .row .col-md-2 img {
+  width: 100%;
+  height: auto;
+}
+
+.card .row .col-md-2 {
+  margin: 15px 5px 15px 15px;
+}
+
+.card .btn {
+  margin: 15px;
+}
+
+.card .row .col-md-1 {
+  margin: auto;
+}
+
+.card {
+  margin: 15px 0;
+  border: 1px solid #000 !important;
+}

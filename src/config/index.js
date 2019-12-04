@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { selectFields } from './selectFields';
 
 const baseURL = 'https://edu-api.chop-chop.org/';
 const postsURL = `${baseURL}posts`;
