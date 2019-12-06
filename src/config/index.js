@@ -4,22 +4,7 @@ import { selectFields } from './selectFields';
 const baseURL = 'https://edu-api.chop-chop.org/';
 const postsURL = `${baseURL}posts`;
 const authURL = `${baseURL}auth`;
-
-export const getPosts = async () => {
-  try {
-    const token = await getToken().then(({ data }) => data.token);
-    const result = await axios
-      .get(postsURL, {
-        headers: {
-          'X-Token': token
-        }
-      })
-      .then(data => data);
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
-};
+const authorURL = `${baseURL}author/`;
 
 const getToken = async () => {
   const token = await axios
@@ -29,4 +14,32 @@ const getToken = async () => {
     })
     .then(({ data }) => data);
   return token;
+};
+
+export const getPosts = async () => {
+  try {
+    const token = await getToken().then(({ data }) => data.token);
+    const result = await axios
+      .get(`${postsURL}?page=3`, {
+        headers: {
+          'X-Token': token
+        }
+      })
+      .then(({ data }) => data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAuthor = async authorId => {
+  try {
+    const token = await getToken().then(({ data }) => data.token);
+    const result = await axios
+      .get(authorURL + authorId, { headers: { 'X-Token': token } })
+      .then(({ data }) => data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 };
