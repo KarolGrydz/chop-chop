@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { selectFields } from './selectFields';
 
 const baseURL = 'https://edu-api.chop-chop.org/';
 const postsURL = `${baseURL}posts`;
 const authURL = `${baseURL}auth`;
 const authorURL = `${baseURL}author/`;
 
-const getToken = async () => {
+export const getToken = async () => {
   const token = await axios
     .post(authURL, {
       username: 'appdev',
@@ -16,11 +15,10 @@ const getToken = async () => {
   return token;
 };
 
-export const getPosts = async () => {
+export const getPosts = async (token, page = 1) => {
   try {
-    const token = await getToken().then(({ data }) => data.token);
     const result = await axios
-      .get(`${postsURL}?page=3`, {
+      .get(`${postsURL}?page=${page}`, {
         headers: {
           'X-Token': token
         }
@@ -32,9 +30,8 @@ export const getPosts = async () => {
   }
 };
 
-export const getAuthor = async authorId => {
+export const getAuthor = async (authorId, token) => {
   try {
-    const token = await getToken().then(({ data }) => data.token);
     const result = await axios
       .get(authorURL + authorId, { headers: { 'X-Token': token } })
       .then(({ data }) => data);

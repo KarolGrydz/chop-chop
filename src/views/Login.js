@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../context';
 import { Button, Form, FormGroup, Input, Row, Col } from 'reactstrap';
+import { getToken } from '../config';
 import '../styles/Login.css';
 
-export const Login = props => {
+export const Login = () => {
+  const [state, setState] = useContext(Context);
+  const { token, dashboard } = state;
+  const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
+
+  const userInput = e => {
+    setUserName(e.target.value);
+  };
+
+  const passInput = e => {
+    setPassword(e.target.value);
+  };
+
+  const submit = () => {
+    getToken().then(({ data }) =>
+      setState({ token: data.token, dashboard: true })
+    );
+  };
+
   return (
     <Row className="justify-content-center">
       <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
@@ -15,6 +36,7 @@ export const Login = props => {
                 name="username"
                 id="username"
                 placeholder="Username"
+                onChange={userInput}
               />
             </FormGroup>
             <FormGroup>
@@ -23,9 +45,10 @@ export const Login = props => {
                 name="password"
                 id="password"
                 placeholder="Password"
+                onChange={passInput}
               />
             </FormGroup>
-            <Button>Login</Button>
+            <Button onClick={submit}>Login</Button>
           </Form>
         </div>
       </Col>

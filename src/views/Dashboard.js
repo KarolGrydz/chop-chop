@@ -1,12 +1,10 @@
-import React, { Fragment } from 'react';
-import { AppNavbar } from './AppNavbar';
+import React, { Fragment, useContext } from 'react';
+import { Context } from '../context';
+import { Login } from './Login';
 import { Posts } from '../components/Posts';
 
 export const Dashboard = () => {
-  return (
-    <Fragment>
-      <AppNavbar />
-      <Posts />
-    </Fragment>
-  );
+  const [state] = useContext(Context);
+  const { dashboard } = state;
+  return <Fragment>{dashboard ? <Posts /> : <Login />}</Fragment>;
 };
