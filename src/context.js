@@ -7,8 +7,9 @@ export function ContextController({ children }) {
   let intialState = {
     dashboard: false,
     posts: [],
-    currentSide: [],
-    token: ''
+    token: '',
+    currentPage: 1,
+    totalPages: 10
   };
 
   const [state, setState] = useState(intialState);

@@ -1,0 +1,13 @@
+nav .pagination {
+  justify-content: center;
+}
+
+nav .pagination ul li .page-item {
+  font-size: 24px;
+  border: 1px solid black;
+}
+
+.active {
+  color: black;
+  background: #007bff;
+}

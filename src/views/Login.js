@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Context } from '../context';
 import { Button, Form, FormGroup, Input, Row, Col } from 'reactstrap';
-import { getToken } from '../config';
+import { getToken, getPosts } from '../config';
 import '../styles/Login.css';
 
 export const Login = () => {
@@ -20,31 +20,31 @@ export const Login = () => {
 
   const submit = () => {
     getToken().then(({ data }) =>
-      setState({ token: data.token, dashboard: true })
+      setState({ ...state, token: data.token, dashboard: true })
     );
   };
 
   return (
-    <Row className="justify-content-center">
+    <Row className='justify-content-center'>
       <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
         <h2>Simple Web App</h2>
-        <div className="login">
+        <div className='login'>
           <Form>
             <FormGroup>
               <Input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
+                type='text'
+                name='username'
+                id='username'
+                placeholder='Username'
                 onChange={userInput}
               />
             </FormGroup>
             <FormGroup>
               <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
+                type='password'
+                name='password'
+                id='password'
+                placeholder='Password'
                 onChange={passInput}
               />
             </FormGroup>
@@ -52,6 +52,7 @@ export const Login = () => {
           </Form>
         </div>
       </Col>
+      {console.log(dashboard)}
     </Row>
   );
 };
