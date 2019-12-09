@@ -1,0 +1,14 @@
+.comment-modal h2 {
+  padding: 15px;
+}
+
+.comment-modal input {
+  border: 1px solid black;
+  width: auto !important;
+}
+
+.comment-modal textarea {
+  border: 1px solid black;
+  width: 100%;
+  height: 200px !important;
+}

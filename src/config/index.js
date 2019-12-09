@@ -4,6 +4,7 @@ const baseURL = 'https://edu-api.chop-chop.org/';
 const postsURL = `${baseURL}posts`;
 const authURL = `${baseURL}auth`;
 const authorURL = `${baseURL}author/`;
+const commentURL = `${baseURL}comments`;
 
 export const getToken = async () => {
   const token = await axios
@@ -36,6 +37,20 @@ export const getAuthor = async (authorId, token) => {
       .get(authorURL + authorId, { headers: { 'X-Token': token } })
       .then(({ data }) => data);
     return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postComment = async (userName, comment) => {
+  try {
+    const post = await axios
+      .post(commentURL, {
+        user: userName,
+        comment
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   } catch (error) {
     console.log(error);
   }

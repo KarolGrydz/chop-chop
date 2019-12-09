@@ -1,20 +1,25 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { Dashboard } from './views/Dashboard';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import './styles/App.css';
+import { Login } from './views/Login';
+import { SinglePost } from './components/SinglePost';
+import { Posts } from './components/Posts';
 
 import { ContextController } from './context';
+
+import './styles/App.css';
 
 export const App = () => {
   return (
     <ContextController>
       <Router>
         <Container fluid={true}>
-          <Dashboard />
           <Switch>
-            {/* <Route exact path="/Login" component={Login} />
-            <Route exact path="/Dashboard" component={Dashboard} /> */}
+            <Route exact path='/' component={Dashboard} />
+            <Route exact path='/auth' component={Login} />
+            <Route exact path='/posts' component={Posts} />
+            <Route exact path='/posts/:id' component={SinglePost} />
           </Switch>
         </Container>
       </Router>

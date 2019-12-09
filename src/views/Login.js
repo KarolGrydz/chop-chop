@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../context';
 import { Button, Form, FormGroup, Input, Row, Col } from 'reactstrap';
 import { getToken, getPosts } from '../config';
@@ -6,7 +7,6 @@ import '../styles/Login.css';
 
 export const Login = () => {
   const [state, setState] = useContext(Context);
-  const { token, dashboard } = state;
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
 
@@ -52,7 +52,6 @@ export const Login = () => {
           </Form>
         </div>
       </Col>
-      {console.log(dashboard)}
     </Row>
   );
 };

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { getToken, getPosts } from './config';
+import React, { useState } from 'react';
 
 export const Context = React.createContext();
 

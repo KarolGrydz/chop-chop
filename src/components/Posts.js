@@ -10,16 +10,25 @@ import { Pagination } from './Pagination';
 
 export const Posts = () => {
   const [state, setState] = useContext(Context);
-  const { token, currentPage, posts, totalPages } = state;
+  const { token, currentPage, posts } = state;
 
-  const [pagination, setPagination] = useState({});
   const [viewOptions, setViewOptions] = useState(true);
 
   useEffect(() => {
-    getPosts(token, currentPage).then(({ data }) =>
-      setState({ ...state, posts: data, totalPages: pagination })
-    );
-    console.log(totalPages);
+    getPosts(token, currentPage).then(data => {
+      try {
+        setState({
+          ...state,
+          posts: data.data,
+          totalPages: data.pagination.totalPages
+        });
+      } catch (error) {
+        setState({
+          ...state,
+          posts: false
+        });
+      }
+    });
   }, [currentPage]);
 
   const toggleViewOptions = () => setViewOptions(!viewOptions);
@@ -75,10 +84,14 @@ export const Posts = () => {
       <Pagination />
     </Fragment>
   ) : (
-    <Row className='justify-content-center'>
-      <Col>
-        <h1>Ops... Something gone wrong, please pick other page.</h1>
-      </Col>
-    </Row>
+    <Fragment>
+      <AppNavbar />
+      <Row className='justify-content-center'>
+        <Col>
+          <h1>Ops... Something gone wrong, please pick other page.</h1>
+        </Col>
+      </Row>
+      <Pagination />
+    </Fragment>
   );
 };
