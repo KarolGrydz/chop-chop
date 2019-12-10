@@ -13,12 +13,12 @@ export const AppNavbar = props => {
         <Nav>
           <Col>
             <NavItem>
-              <img alt='img'></img>
+              <img alt="img"></img>
             </NavItem>
           </Col>
           <Col>
             <NavItem>
-              <Link to='/'>Home</Link>
+              <Link to="/">Home</Link>
             </NavItem>
           </Col>
           <Col sm={{ size: '8' }} md={{ size: '8' }}>
@@ -28,7 +28,7 @@ export const AppNavbar = props => {
           </Col>
           <Col>
             <NavItem>
-              <Link to='/Login'>Logout</Link>
+              <Link to="/auth">Logout</Link>
             </NavItem>
           </Col>
         </Nav>

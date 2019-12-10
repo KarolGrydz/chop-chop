@@ -5,7 +5,7 @@ import { PostList } from './PostList';
 import { PostGrid } from './PostGrid';
 import { MyDropdown } from './MyDropdown';
 import { AppNavbar } from '../views/AppNavbar';
-import { getPosts } from '../config';
+import { getPosts, sortBy, sortByTitle } from '../config';
 import { Pagination } from './Pagination';
 
 export const Posts = () => {
@@ -31,6 +31,40 @@ export const Posts = () => {
     });
   }, [currentPage]);
 
+  const sortByDate = () => {
+    sortBy(token, 'date').then(data => {
+      try {
+        setState({
+          ...state,
+          posts: data.data,
+          totalPages: data.pagination.totalPages
+        });
+      } catch (error) {
+        setState({
+          ...state,
+          posts: false
+        });
+      }
+    });
+  };
+
+  const sortByTitle = () => {
+    sortBy(token, 'title').then(data => {
+      try {
+        setState({
+          ...state,
+          posts: data.data,
+          totalPages: data.pagination.totalPages
+        });
+      } catch (error) {
+        setState({
+          ...state,
+          posts: false
+        });
+      }
+    });
+  };
+
   const toggleViewOptions = () => setViewOptions(!viewOptions);
 
   return posts ? (
@@ -39,32 +73,33 @@ export const Posts = () => {
       <Col
         sm={{ size: '10', offset: '1' }}
         md={{ size: '10', offset: '1' }}
-        className='justify-content-center'
+        className="justify-content-center"
       >
-        <Row className='justify-content-center'>
+        <Row className="justify-content-center">
           <Col sm={{ size: '2' }} md={{ size: '2' }}>
-            <MyDropdown title='Sort by A-z'>
+            <MyDropdown title="Sort by A-z">
               <DropdownItem>Sort by A-Z</DropdownItem>
             </MyDropdown>
           </Col>
           <Col sm={{ size: '2' }} md={{ size: '2' }}>
-            <MyDropdown title='Sort by date'>
-              <DropdownItem>Sort by date</DropdownItem>
+            <MyDropdown title="Sort by date">
+              <DropdownItem onClick={sortByDate}>Sort by date</DropdownItem>
+              <DropdownItem onClick={sortByTitle}>Sort by title</DropdownItem>
             </MyDropdown>
           </Col>
           <Col
-            className='float-left'
+            className="float-left"
             sm={{ size: '1', offset: '5' }}
             md={{ size: '1', offset: '5' }}
           >
-            <MyDropdown title='Options'>
+            <MyDropdown title="Options">
               <DropdownItem onClick={toggleViewOptions}>Grid</DropdownItem>
               <DropdownItem onClick={toggleViewOptions}>List</DropdownItem>
             </MyDropdown>
           </Col>
         </Row>
         {viewOptions ? (
-          <Row className='justify-content-center'>
+          <Row className="justify-content-center">
             <Col sm={{ size: '10' }} md={{ size: '10' }}>
               {posts.map(post => (
                 <PostList key={post.id} post={post} token={token} />
@@ -86,7 +121,7 @@ export const Posts = () => {
   ) : (
     <Fragment>
       <AppNavbar />
-      <Row className='justify-content-center'>
+      <Row className="justify-content-center">
         <Col>
           <h1>Ops... Something gone wrong, please pick other page.</h1>
         </Col>

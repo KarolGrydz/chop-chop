@@ -42,6 +42,36 @@ export const getAuthor = async (authorId, token) => {
   }
 };
 
+export const sortByTitle = async token => {
+  try {
+    const result = await axios
+      .get(`${postsURL}?order=asc`, {
+        headers: {
+          'X-Token': token
+        }
+      })
+      .then(({ data }) => data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sortBy = async (token, category) => {
+  try {
+    const result = await axios
+      .get(`${postsURL}?orderBy=${category}`, {
+        headers: {
+          'X-Token': token
+        }
+      })
+      .then(({ data }) => data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postComment = async (userName, comment) => {
   try {
     const post = await axios
