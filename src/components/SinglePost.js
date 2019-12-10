@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Author } from './Author';
 import { Comments } from './Comments';
-import { Button, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
 import '../styles/SinglePost.css';
 
@@ -47,7 +47,7 @@ export const SinglePost = props => {
               <p>{content}</p>
             </Row>
             <Row className='justify-content-center'>
-              <Comments />
+              <Comments postId={id} />
             </Row>
           </Col>
         </Row>

@@ -20,7 +20,7 @@ export const Pagination = () => {
     <nav>
       <ul className='pagination'>
         {pageNumbers.map(number =>
-          currentPage == number ? (
+          Number(currentPage) === number ? (
             <li key={number} className='page-item active'>
               <Link
                 onClick={changePage}

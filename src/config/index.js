@@ -5,13 +5,17 @@ const postsURL = `${baseURL}posts`;
 const authURL = `${baseURL}auth`;
 const authorURL = `${baseURL}author/`;
 const commentURL = `${baseURL}comments`;
+const timeURL = `${baseURL}time/`;
 
-export const getToken = async () => {
+// ih^ZWK06%Y
+
+export const getToken = async (username, password) => {
+  const data = {
+    username,
+    password
+  };
   const token = await axios
-    .post(authURL, {
-      username: 'appdev',
-      password: 'ih^ZWK06%Y'
-    })
+    .post(authURL, JSON.stringify(data))
     .then(({ data }) => data);
   return token;
 };
@@ -72,15 +76,27 @@ export const sortBy = async (token, category) => {
   }
 };
 
-export const postComment = async (userName, comment) => {
+export const postComment = async (postId, userName, comment) => {
+  const data = { postId, user: userName, comment };
   try {
     const post = await axios
-      .post(commentURL, {
-        user: userName,
-        comment
-      })
+      .post(commentURL, JSON.stringify(data))
       .then(res => console.log(res))
       .catch(err => console.log(err));
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sendTime = async (postId, time) => {
+  const data = { time };
+  try {
+    const timer = await axios
+      .put(`${timeURL}${postId}`, JSON.stringify(data))
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    return timer;
   } catch (error) {
     console.log(error);
   }

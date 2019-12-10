@@ -1,24 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Row, Col } from 'reactstrap';
-import { Login } from './Login';
-import { Dashboard } from './Dashboard';
 
 import '../styles/AppNavbar.css';
 
-export const AppNavbar = props => {
+export const AppNavbar = () => {
   return (
     <Row>
       <Navbar>
         <Nav>
           <Col>
             <NavItem>
-              <img alt="img"></img>
+              <img alt='img'></img>
             </NavItem>
           </Col>
           <Col>
             <NavItem>
-              <Link to="/">Home</Link>
+              <Link to='/'>Home</Link>
             </NavItem>
           </Col>
           <Col sm={{ size: '8' }} md={{ size: '8' }}>
@@ -28,7 +26,7 @@ export const AppNavbar = props => {
           </Col>
           <Col>
             <NavItem>
-              <Link to="/auth">Logout</Link>
+              <Link to='/auth'>Logout</Link>
             </NavItem>
           </Col>
         </Nav>
