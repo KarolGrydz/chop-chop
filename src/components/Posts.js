@@ -10,64 +10,43 @@ import { Pagination } from './Pagination';
 
 export const Posts = () => {
   const [state, setState] = useContext(Context);
-  const { token, currentPage, posts } = state;
+  const { token, currentPage, posts, totalPages } = state;
 
   const [viewOptions, setViewOptions] = useState(true);
 
   useEffect(() => {
     getPosts(token, currentPage).then(data => {
-      try {
-        setState({
-          ...state,
-          posts: data.data,
-          totalPages: data.pagination.totalPages
-        });
-      } catch (error) {
-        setState({
-          ...state,
-          posts: false
-        });
-      }
+      setState({
+        ...state,
+        posts: data.data,
+        totalPages: data.pagination
+      });
     });
   }, [currentPage]);
 
   const sortByDate = () => {
     sortBy(token, 'date').then(data => {
-      try {
-        setState({
-          ...state,
-          posts: data.data,
-          totalPages: data.pagination.totalPages
-        });
-      } catch (error) {
-        setState({
-          ...state,
-          posts: false
-        });
-      }
+      setState({
+        ...state,
+        posts: data.data,
+        totalPages: data.pagination.totalPages
+      });
     });
   };
 
   const sortByTitle = () => {
     sortBy(token, 'title').then(data => {
-      try {
-        setState({
-          ...state,
-          posts: data.data,
-          totalPages: data.pagination.totalPages
-        });
-      } catch (error) {
-        setState({
-          ...state,
-          posts: false
-        });
-      }
+      setState({
+        ...state,
+        posts: data.data,
+        totalPages: data.pagination.totalPages
+      });
     });
   };
 
   const toggleViewOptions = () => setViewOptions(!viewOptions);
 
-  return posts ? (
+  return totalPages ? (
     <Fragment>
       <AppNavbar />
       <Col

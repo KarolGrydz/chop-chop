@@ -32,6 +32,7 @@ export const getPosts = async (token, page = 1) => {
     return result;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 

@@ -1,14 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import '../styles/Pagination.css';
 
-export const Pagination = () => {
+export const Pagination = memo(function Pagination() {
   const [state, setState] = useContext(Context);
-  const { currentPage, totalPages } = state;
-  const pageNumbers = [];
+  const { currentPage } = state;
+  let { totalPages } = state;
+  let pageNumbers = [];
 
-  for (let i = 1; i <= totalPages; i++) {
+  if (!totalPages) {
+    totalPages = { totalPages: 10 };
+  }
+
+  for (let i = 1; i <= totalPages.totalPages; i++) {
     pageNumbers.push(i);
   }
 
@@ -45,4 +50,4 @@ export const Pagination = () => {
       </ul>
     </nav>
   ) : null;
-};
+});

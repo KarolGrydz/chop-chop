@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import uuid from 'react-uuid';
 import {
   Col,
   FormFeedback,
@@ -12,48 +11,45 @@ import {
   FormGroup,
   Input
 } from 'reactstrap';
-import { postComment, sendTime } from '../config';
+
 import '../styles/Comments.css';
 
 export const Comments = ({ postId }) => {
   const [modal, setModal] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [comment, setComment] = useState('');
-  const [radio, setRadio] = useState(false);
-  let [startTime] = useState();
-  let [time, setTime] = useState(0);
+  const [userName, setUserName] = useState(1);
+  const [comment, setComment] = useState(1);
+  const [checkbox, setCheckbox] = useState(1);
 
   const toggle = () => {
-    let seconds = 0;
     setModal(!modal);
-    startTime = setInterval(() => {
-      seconds += 10;
-      //Bez bazy danych
-      // setTime((time = seconds));
-    }, 10);
-    console.log(postId);
   };
 
   const cancel = () => {
+    setComment(1);
+    setUserName(1);
+    setCheckbox(1);
     setModal(!modal);
-    console.log(time);
-    clearInterval(startTime);
-    sendTime(postId, time);
   };
 
   const submit = () => {
-    const postId = uuid();
-    if (userName) {
-      if (comment) {
-        if (radio) {
-          //Bez bazy danych
-          //postComment(postId, userName, comment);
-          setModal(!modal);
-          console.log(time);
-          clearTimeout(startTime);
-          //Bez bazy danych
-          // sendTime(postId, time);
-        }
+    if (
+      userName &&
+      isNaN(userName) &&
+      comment &&
+      isNaN(comment) &&
+      checkbox &&
+      isNaN(checkbox)
+    ) {
+      setModal(!modal);
+    } else {
+      if (!isNaN(checkbox)) {
+        setCheckbox(false);
+      }
+      if (!isNaN(userName)) {
+        setUserName(false);
+      }
+      if (!isNaN(comment)) {
+        setComment(false);
       }
     }
   };
@@ -62,12 +58,24 @@ export const Comments = ({ postId }) => {
     setUserName(e.target.value);
   };
 
+  const userNameReset = () => {
+    if (!isNaN(userName)) {
+      setUserName(false);
+    }
+  };
+
   const commentInput = e => {
     setComment(e.target.value);
   };
 
-  const radioCheck = () => {
-    setRadio(!radio);
+  const commentReset = () => {
+    if (!isNaN(comment)) {
+      setComment(false);
+    }
+  };
+
+  const checkboxCheck = () => {
+    setCheckbox(!checkbox);
   };
 
   return (
@@ -89,6 +97,7 @@ export const Comments = ({ postId }) => {
                       id='username'
                       placeholder='Username'
                       onChange={userNameInput}
+                      onBlur={userNameReset}
                       invalid={userName ? null : true}
                     />
                     <FormFeedback invalid={'true'}>
@@ -102,6 +111,7 @@ export const Comments = ({ postId }) => {
                       id='comment'
                       placeholder='Please write your comment here...'
                       onChange={commentInput}
+                      onBlur={commentReset}
                       invalid={comment ? null : true}
                     />
                     <FormFeedback invalid={'true'}>
@@ -111,10 +121,10 @@ export const Comments = ({ postId }) => {
                   <FormGroup check>
                     <Label check>
                       <Input
-                        type='radio'
+                        type='checkbox'
                         name='accept'
-                        onClick={radioCheck}
-                        invalid={radio ? null : true}
+                        onClick={checkboxCheck}
+                        invalid={checkbox ? null : true}
                       />
                       I accept
                       <FormFeedback invalid={'true'}>Plase accept</FormFeedback>

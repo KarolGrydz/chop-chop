@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
+import uuid from 'react-uuid';
 import { Author } from './Author';
 import { Comments } from './Comments';
 import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
+import { postComment, sendTime } from '../config';
 import '../styles/SinglePost.css';
 
 export const SinglePost = props => {
@@ -14,6 +16,20 @@ export const SinglePost = props => {
     date,
     id
   } = props.location.state;
+
+  let [startTime] = useState();
+  let [time, setTime] = useState(0);
+
+  const toggle = () => {
+    const postId = uuid();
+    let seconds = 0;
+    startTime = setInterval(() => {
+      seconds += 10;
+      //Bez bazy danych
+      // setTime((time = seconds));
+      sendTime(postId, time);
+    }, 10);
+  };
 
   return (
     <Fragment>

@@ -8,7 +8,7 @@ export function ContextController({ children }) {
     posts: [],
     token: '',
     currentPage: 1,
-    totalPages: 10
+    totalPages: { totalPages: 10 }
   };
 
   const [state, setState] = useState(intialState);
