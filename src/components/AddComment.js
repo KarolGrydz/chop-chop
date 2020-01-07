@@ -12,9 +12,9 @@ import {
   Input
 } from 'reactstrap';
 
-import '../styles/Comments.css';
+import '../styles/AddComment.css';
 
-export const Comments = ({ postId }) => {
+export const AddComment = ({ postId }) => {
   const [modal, setModal] = useState(false);
   const [userName, setUserName] = useState(1);
   const [comment, setComment] = useState(1);
@@ -40,6 +40,7 @@ export const Comments = ({ postId }) => {
       checkbox &&
       isNaN(checkbox)
     ) {
+      //send callback to singlepost.js with username and comment
       setModal(!modal);
     } else {
       if (!isNaN(checkbox)) {

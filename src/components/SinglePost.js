@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import uuid from 'react-uuid';
 import { Author } from './Author';
-import { Comments } from './Comments';
+import { AddComment } from './AddComment';
 import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
 import { postComment, sendTime } from '../config';
@@ -16,6 +16,12 @@ export const SinglePost = props => {
     date,
     id
   } = props.location.state;
+
+  const [CommentsList, setCommentsList] = useState({
+    id: [],
+    author: [],
+    comment: []
+  });
 
   let [startTime] = useState();
   let [time, setTime] = useState(0);
@@ -63,7 +69,10 @@ export const SinglePost = props => {
               <p>{content}</p>
             </Row>
             <Row className='justify-content-center'>
-              <Comments postId={id} />
+              <h1>Tutaj komenty</h1>
+            </Row>
+            <Row className='justify-content-center'>
+              <AddComment postId={id} />
             </Row>
           </Col>
         </Row>

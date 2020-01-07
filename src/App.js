@@ -5,7 +5,7 @@ import { Dashboard } from './views/Dashboard';
 import { Login } from './views/Login';
 import { SinglePost } from './components/SinglePost';
 import { Posts } from './components/Posts';
-import { Comments } from './components/Comments';
+import { AddComment } from './components/AddComment';
 
 import { ContextController } from './context';
 
@@ -21,7 +21,7 @@ export const App = () => {
             <Route exact path='/auth' component={Login} />
             <Route exact path='/posts' component={Posts} />
             <Route exact path='/posts/:id' component={SinglePost} />
-            <Route exact path='/posts/:id/comments' component={Comments} />
+            <Route exact path='/posts/:id/AddComment' component={AddComment} />
             <Route exact path='/author/:id' component={SinglePost} />
           </Switch>
         </Container>
