@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import uuid from 'react-uuid';
 import { Author } from './Author';
+import { Comments } from './Comments';
 import { AddComment } from './AddComment';
 import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
@@ -17,11 +18,10 @@ export const SinglePost = props => {
     id
   } = props.location.state;
 
-  const [CommentsList, setCommentsList] = useState({
-    id: [],
-    author: [],
-    comment: []
-  });
+  const [commentsList, setCommentsList] = useState([
+    { id: 0, name: 'karol', comment: 'to jest pierwszy komment' },
+    { id: 1, name: 'kamila', comment: 'to jest drugi komment' }
+  ]);
 
   let [startTime] = useState();
   let [time, setTime] = useState(0);
@@ -40,17 +40,17 @@ export const SinglePost = props => {
   return (
     <Fragment>
       <AppNavbar />
-      <main className='single-post'>
+      <main className="single-post">
         <Row>
           <Col
             sm={{ size: '10', offset: '1' }}
             md={{ size: '10', offset: '1' }}
           >
-            <h2 className='text-center'>{title}</h2>
+            <h2 className="text-center">{title}</h2>
           </Col>
         </Row>
-        <Row className='justify-content-center'>
-          <img src={thumbnail} alt='img' />
+        <Row className="justify-content-center">
+          <img src={thumbnail} alt="img" />
         </Row>
         <Row>
           <Col sm={{ size: '6', offset: '3' }} md={{ size: '6', offset: '3' }}>
@@ -68,10 +68,12 @@ export const SinglePost = props => {
             <Row>
               <p>{content}</p>
             </Row>
-            <Row className='justify-content-center'>
-              <h1>Tutaj komenty</h1>
+            <Row className="justify-content-center">
+              {commentsList.map(singleComment => (
+                <Comments key={singleComment.id} comment={singleComment} />
+              ))}
             </Row>
-            <Row className='justify-content-center'>
+            <Row className="justify-content-center">
               <AddComment postId={id} />
             </Row>
           </Col>
