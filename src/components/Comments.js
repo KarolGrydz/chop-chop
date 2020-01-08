@@ -1,11 +1,12 @@
 import React from 'react';
 
-export const Comments = () => {
+export const Comments = ({ singleComment }) => {
+  console.log(singleComment);
   return (
-    <div className="comment-area">
-      <span>author</span>
+    <div className='comment-area'>
+      <span>{singleCommnet.name}</span>
       <br />
-      <p>comment</p>
+      <p>{singleComment.comment}</p>
     </div>
   );
 };

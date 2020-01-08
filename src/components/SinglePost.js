@@ -40,17 +40,17 @@ export const SinglePost = props => {
   return (
     <Fragment>
       <AppNavbar />
-      <main className="single-post">
+      <main className='single-post'>
         <Row>
           <Col
             sm={{ size: '10', offset: '1' }}
             md={{ size: '10', offset: '1' }}
           >
-            <h2 className="text-center">{title}</h2>
+            <h2 className='text-center'>{title}</h2>
           </Col>
         </Row>
-        <Row className="justify-content-center">
-          <img src={thumbnail} alt="img" />
+        <Row className='justify-content-center'>
+          <img src={thumbnail} alt='img' />
         </Row>
         <Row>
           <Col sm={{ size: '6', offset: '3' }} md={{ size: '6', offset: '3' }}>
@@ -68,12 +68,15 @@ export const SinglePost = props => {
             <Row>
               <p>{content}</p>
             </Row>
-            <Row className="justify-content-center">
+            <Row className='justify-content-center'>
               {commentsList.map(singleComment => (
-                <Comments key={singleComment.id} comment={singleComment} />
+                <Comments
+                  key={singleComment.id}
+                  singleComment={singleComment}
+                />
               ))}
             </Row>
-            <Row className="justify-content-center">
+            <Row className='justify-content-center'>
               <AddComment postId={id} />
             </Row>
           </Col>
