@@ -1,0 +1,10 @@
+.comment-area {
+  background-color: #e9ecef;
+  margin-bottom: 25px;
+  padding: 15px;
+}
+
+.comment-area span {
+  font-weight: bold;
+  text-decoration: underline;
+}

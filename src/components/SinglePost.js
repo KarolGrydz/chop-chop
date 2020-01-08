@@ -23,11 +23,18 @@ export const SinglePost = props => {
     { id: 1, name: 'kamila', comment: 'to jest drugi komment' }
   ]);
 
+  const postId = uuid();
   let [startTime] = useState();
   let [time, setTime] = useState(0);
 
+  const reciveComment = data => {
+    // setCommentsList(commentsList.push(data));
+    const table1 = [];
+    table1.push(data);
+    console.log(table1);
+  };
+
   const toggle = () => {
-    const postId = uuid();
     let seconds = 0;
     startTime = setInterval(() => {
       seconds += 10;
@@ -40,17 +47,17 @@ export const SinglePost = props => {
   return (
     <Fragment>
       <AppNavbar />
-      <main className='single-post'>
+      <main className="single-post">
         <Row>
           <Col
             sm={{ size: '10', offset: '1' }}
             md={{ size: '10', offset: '1' }}
           >
-            <h2 className='text-center'>{title}</h2>
+            <h2 className="text-center">{title}</h2>
           </Col>
         </Row>
-        <Row className='justify-content-center'>
-          <img src={thumbnail} alt='img' />
+        <Row className="justify-content-center">
+          <img src={thumbnail} alt="img" />
         </Row>
         <Row>
           <Col sm={{ size: '6', offset: '3' }} md={{ size: '6', offset: '3' }}>
@@ -68,7 +75,7 @@ export const SinglePost = props => {
             <Row>
               <p>{content}</p>
             </Row>
-            <Row className='justify-content-center'>
+            <Row className="justify-content-center">
               {commentsList.map(singleComment => (
                 <Comments
                   key={singleComment.id}
@@ -76,8 +83,8 @@ export const SinglePost = props => {
                 />
               ))}
             </Row>
-            <Row className='justify-content-center'>
-              <AddComment postId={id} />
+            <Row className="justify-content-center">
+              <AddComment postId={id} reciveComment={reciveComment} />
             </Row>
           </Col>
         </Row>
