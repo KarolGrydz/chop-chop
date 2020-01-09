@@ -1,11 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import uuid from 'react-uuid';
 import { Author } from './Author';
 import { Comments } from './Comments';
 import { AddComment } from './AddComment';
 import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
-import { postComment, sendTime } from '../config';
+import { sendTime } from '../config';
 import '../styles/SinglePost.css';
 
 export const SinglePost = props => {
@@ -18,46 +18,46 @@ export const SinglePost = props => {
     id
   } = props.location.state;
 
-  const [commentsList, setCommentsList] = useState([
-    { id: 0, name: 'karol', comment: 'to jest pierwszy komment' },
-    { id: 1, name: 'kamila', comment: 'to jest drugi komment' }
-  ]);
+  const [commentsList, setCommentsList] = useState([]);
 
   const postId = uuid();
   let [startTime] = useState();
   let [time, setTime] = useState(0);
 
   const reciveComment = data => {
-    // setCommentsList(commentsList.push(data));
-    const table1 = [];
-    table1.push(data);
-    console.log(table1);
+    setCommentsList([...commentsList, data]);
   };
 
-  const toggle = () => {
+  useEffect(() => {
+    console.log('start liczenia');
     let seconds = 0;
     startTime = setInterval(() => {
       seconds += 10;
-      //Bez bazy danych
-      // setTime((time = seconds));
-      sendTime(postId, time);
+      setTime((time = seconds));
     }, 10);
-  };
+    return () => {
+      console.log(
+        'stop licznika, czas na stronie ' + Math.floor(time / 1000) + ' sekund'
+      );
+      sendTime(id, time);
+      clearInterval(startTime);
+    };
+  }, []);
 
   return (
     <Fragment>
       <AppNavbar />
-      <main className="single-post">
+      <main className='single-post'>
         <Row>
           <Col
             sm={{ size: '10', offset: '1' }}
             md={{ size: '10', offset: '1' }}
           >
-            <h2 className="text-center">{title}</h2>
+            <h2 className='text-center'>{title}</h2>
           </Col>
         </Row>
-        <Row className="justify-content-center">
-          <img src={thumbnail} alt="img" />
+        <Row className='justify-content-center'>
+          <img src={thumbnail} alt='img' />
         </Row>
         <Row>
           <Col sm={{ size: '6', offset: '3' }} md={{ size: '6', offset: '3' }}>
@@ -75,7 +75,7 @@ export const SinglePost = props => {
             <Row>
               <p>{content}</p>
             </Row>
-            <Row className="justify-content-center">
+            <Row className='justify-content-center'>
               {commentsList.map(singleComment => (
                 <Comments
                   key={singleComment.id}
@@ -83,8 +83,8 @@ export const SinglePost = props => {
                 />
               ))}
             </Row>
-            <Row className="justify-content-center">
-              <AddComment postId={id} reciveComment={reciveComment} />
+            <Row className='justify-content-center'>
+              <AddComment postId={postId} reciveComment={reciveComment} />
             </Row>
           </Col>
         </Row>

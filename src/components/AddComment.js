@@ -11,6 +11,7 @@ import {
   FormGroup,
   Input
 } from 'reactstrap';
+import { postComment } from '../config';
 
 import '../styles/AddComment.css';
 
@@ -41,7 +42,8 @@ export const AddComment = ({ postId, reciveComment }) => {
       isNaN(checkbox)
     ) {
       //send callback to singlepost.js with username and comment
-      reciveComment({ postId, userName, comment });
+      reciveComment({ id: postId, name: userName, comment });
+      postComment(postId, userName, comment);
       setModal(!modal);
       setComment(1);
       setUserName(1);
@@ -89,22 +91,22 @@ export const AddComment = ({ postId, reciveComment }) => {
 
   return (
     <Fragment>
-      <Button color="primary" onClick={toggle}>
+      <Button color='primary' onClick={toggle}>
         Comments
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalBody>
-          <div className="comment-modal">
+          <div className='comment-modal'>
             <Row>
               <Col sm={{ size: '12' }} md={{ size: '12' }}>
                 <h2>Add Comment</h2>
                 <Form>
                   <FormGroup>
                     <Input
-                      type="text"
-                      name="username"
-                      id="username"
-                      placeholder="Username"
+                      type='text'
+                      name='username'
+                      id='username'
+                      placeholder='Username'
                       onChange={userNameInput}
                       onBlur={userNameReset}
                       invalid={userName ? null : true}
@@ -115,10 +117,10 @@ export const AddComment = ({ postId, reciveComment }) => {
                   </FormGroup>
                   <FormGroup>
                     <Input
-                      type="textarea"
-                      name="comment"
-                      id="comment"
-                      placeholder="Please write your comment here..."
+                      type='textarea'
+                      name='comment'
+                      id='comment'
+                      placeholder='Please write your comment here...'
                       onChange={commentInput}
                       onBlur={commentReset}
                       invalid={comment ? null : true}
@@ -130,8 +132,8 @@ export const AddComment = ({ postId, reciveComment }) => {
                   <FormGroup check>
                     <Label check>
                       <Input
-                        type="checkbox"
-                        name="accept"
+                        type='checkbox'
+                        name='accept'
                         onClick={checkboxCheck}
                         invalid={checkbox ? null : true}
                       />
@@ -139,7 +141,7 @@ export const AddComment = ({ postId, reciveComment }) => {
                       <FormFeedback invalid={'true'}>Plase accept</FormFeedback>
                     </Label>
                   </FormGroup>
-                  <Button color="primary" onClick={submit}>
+                  <Button color='primary' onClick={submit}>
                     Submit
                   </Button>
                   <Button onClick={cancel}>Cancel</Button>

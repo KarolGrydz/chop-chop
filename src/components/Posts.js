@@ -87,11 +87,13 @@ export const Posts = () => {
           </Row>
         ) : (
           <Row>
-            {posts.map(post => (
-              <Col sm={{ size: '3' }} md={{ size: '3' }}>
-                <PostGrid key={post.id} post={post} />
-              </Col>
-            ))}
+            <Col sm={{ size: '10' }} md={{ size: '10' }}>
+              <div className='grid-container'>
+                {posts.map(post => (
+                  <PostGrid key={post.id} post={post} />
+                ))}
+              </div>
+            </Col>
           </Row>
         )}
       </Col>
