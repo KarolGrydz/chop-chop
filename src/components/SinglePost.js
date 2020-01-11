@@ -5,7 +5,7 @@ import { Comments } from './Comments';
 import { AddComment } from './AddComment';
 import { Col, Row } from 'reactstrap';
 import { AppNavbar } from '../views/AppNavbar';
-import { sendTime } from '../config';
+import { sendTime, getComments } from '../config';
 import '../styles/SinglePost.css';
 
 export const SinglePost = props => {
@@ -15,7 +15,8 @@ export const SinglePost = props => {
     authorId,
     content,
     date,
-    id
+    id,
+    token
   } = props.location.state;
 
   const [commentsList, setCommentsList] = useState([]);
@@ -29,11 +30,14 @@ export const SinglePost = props => {
   };
 
   useEffect(() => {
+    getComments(token, id).then(data => {
+      console.log(data);
+    });
     console.log('start liczenia');
     let seconds = 0;
     startTime = setInterval(() => {
       seconds += 10;
-      setTime((time = seconds));
+      setTime(id, (time = seconds), token);
     }, 10);
     return () => {
       console.log(

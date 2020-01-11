@@ -77,6 +77,21 @@ export const sortBy = async (token, category) => {
   }
 };
 
+export const getComments = async (token, postID) => {
+  try {
+    const result = await axios
+      .get(`${postsURL}/${postID}/comments`, {
+        headers: {
+          'X-Token': token
+        }
+      })
+      .then(({ data }) => data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postComment = async (postId, userName, comment) => {
   const data = { postId, user: userName, comment };
   try {
@@ -90,11 +105,16 @@ export const postComment = async (postId, userName, comment) => {
   }
 };
 
-export const sendTime = async (postId, time) => {
-  const data = { time };
+export const sendTime = async (postId, time, token) => {
+  const data = Math.floor(time / 1000);
+  console.log(data);
   try {
     const timer = await axios
-      .put(`${timeURL}${postId}`, JSON.stringify(data))
+      .put(`${timeURL}${postId}`, JSON.stringify(data), {
+        headers: {
+          'X-Token': token
+        }
+      })
       .then(res => console.log(res))
       .catch(err => console.log(err));
     return timer;

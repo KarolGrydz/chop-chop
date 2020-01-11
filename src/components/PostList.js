@@ -5,7 +5,7 @@ import { Collapse, Button } from 'reactstrap';
 
 import '../styles/PostList.css';
 
-export const PostList = ({ post }) => {
+export const PostList = ({ post, token }) => {
   const { title, thumbnail, authorId, date, excerpt, id } = post;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +22,9 @@ export const PostList = ({ post }) => {
               <div className='col-md-12'>
                 <span>{date}</span>
                 <h5>
-                  <Link to={{ pathname: `posts/${id}`, state: { ...post } }}>
+                  <Link
+                    to={{ pathname: `posts/${id}`, state: { ...post, token } }}
+                  >
                     {title}
                   </Link>
                 </h5>
