@@ -31,7 +31,9 @@ export const SinglePost = props => {
 
   useEffect(() => {
     getComments(token, id).then(data => {
-      console.log(data);
+      if (data.lenght) {
+        setCommentsList([...commentsList, data]);
+      }
     });
     console.log('start liczenia');
     let seconds = 0;

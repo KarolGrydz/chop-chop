@@ -106,15 +106,18 @@ export const postComment = async (postId, userName, comment) => {
 };
 
 export const sendTime = async (postId, time, token) => {
-  const data = Math.floor(time / 1000);
-  console.log(data);
+  const data = JSON.stringify(Math.floor(time / 1000));
   try {
     const timer = await axios
-      .put(`${timeURL}${postId}`, JSON.stringify(data), {
-        headers: {
-          'X-Token': token
+      .put(
+        `${timeURL}${postId}`,
+        { data },
+        {
+          headers: {
+            'X-Token': token
+          }
         }
-      })
+      )
       .then(res => console.log(res))
       .catch(err => console.log(err));
     return timer;
