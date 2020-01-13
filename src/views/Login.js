@@ -29,17 +29,17 @@ export const Login = () => {
   };
 
   return (
-    <Row className='justify-content-center'>
+    <Row className="justify-content-center">
       <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
         <h2>Simple Web App</h2>
-        <div className='login'>
+        <div className="login">
           <Form>
             <FormGroup>
               <Input
-                type='text'
-                name='username'
-                id='username'
-                placeholder='Username'
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username"
                 onChange={userInput}
                 invalid={nameWrong ? null : true}
               />
@@ -47,16 +47,16 @@ export const Login = () => {
             </FormGroup>
             <FormGroup>
               <Input
-                type='password'
-                name='password'
-                id='password'
-                placeholder='Password'
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
                 onChange={passInput}
                 invalid={passWrong ? null : true}
               />
               <FormFeedback invalid={'true'}>Wrong password</FormFeedback>
             </FormGroup>
-            <Link to={'/'} onClick={submit} className='btn btn-primary'>
+            <Link to={'/'} onClick={submit} className="btn btn-primary">
               Login
             </Link>
           </Form>
