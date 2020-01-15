@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { myStorage } from '../config/sessionStorage';
 import { Link } from 'react-router-dom';
 import { Context } from '../context';
 import { Form, FormGroup, Input, Row, Col, FormFeedback } from 'reactstrap';
-import { getToken } from '../config';
+import { getToken, checkLogin } from '../config';
 import '../styles/Login.css';
 
 export const Login = () => {
@@ -11,6 +12,8 @@ export const Login = () => {
   const [username, setUserName] = useState('');
   const [passWrong, setPassWrong] = useState(true);
   const [nameWrong, setNameWrong] = useState(true);
+
+  console.log(password);
 
   const userInput = e => {
     setUserName(e.target.value);
@@ -21,25 +24,38 @@ export const Login = () => {
   };
 
   const submit = () => {
-    getToken(username, password)
-      .then(({ data }) =>
-        setState({ ...state, token: data.token, dashboard: true })
-      )
-      .catch(err => (setPassWrong(!passWrong), setNameWrong(!nameWrong)));
+    if (username && password) {
+      checkLogin(username, password).then(res => {
+        setPassWrong(true);
+        setNameWrong(true);
+        if (res) {
+          getToken(username, password).then(({ data }) => {
+            setState({ ...state, token: data.token, dashboard: true });
+            myStorage.setItem('token', data.token);
+          });
+        } else {
+          setPassWrong(false);
+          setNameWrong(false);
+        }
+      });
+    } else {
+      setPassWrong(false);
+      setNameWrong(false);
+    }
   };
 
   return (
-    <Row className="justify-content-center">
+    <Row className='justify-content-center'>
       <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
         <h2>Simple Web App</h2>
-        <div className="login">
+        <div className='login'>
           <Form>
             <FormGroup>
               <Input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
+                type='text'
+                name='username'
+                id='username'
+                placeholder='Username'
                 onChange={userInput}
                 invalid={nameWrong ? null : true}
               />
@@ -47,16 +63,20 @@ export const Login = () => {
             </FormGroup>
             <FormGroup>
               <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
+                type='password'
+                name='password'
+                id='password'
+                placeholder='Password'
                 onChange={passInput}
                 invalid={passWrong ? null : true}
               />
               <FormFeedback invalid={'true'}>Wrong password</FormFeedback>
             </FormGroup>
-            <Link to={'/'} onClick={submit} className="btn btn-primary">
+            <Link
+              to={passWrong && nameWrong ? '/' : null}
+              onClick={submit}
+              className='btn btn-primary'
+            >
               Login
             </Link>
           </Form>

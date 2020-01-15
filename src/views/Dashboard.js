@@ -1,10 +1,23 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { myStorage } from '../config/sessionStorage';
 import { Context } from '../context';
-import { Login } from './Login';
-import { Posts } from '../components/Posts';
 
 export const Dashboard = () => {
-  const [state] = useContext(Context);
+  const [state, setState] = useContext(Context);
   const { dashboard } = state;
-  return <Fragment>{dashboard ? <Posts /> : <Login />}</Fragment>;
+  const { token } = myStorage;
+
+  useEffect(() => {
+    if (token) {
+      setState({ ...state, token: token, dashboard: true });
+    }
+    console.log(token);
+  }, [dashboard]);
+
+  return (
+    <Fragment>
+      {token ? <Redirect to='/posts' /> : <Redirect to='/auth' />}
+    </Fragment>
+  );
 };

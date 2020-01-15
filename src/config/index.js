@@ -9,6 +9,22 @@ const timeURL = `${baseURL}time/`;
 
 // ih^ZWK06%Y
 
+export const checkLogin = async (username, password) => {
+  const data = {
+    username,
+    password
+  };
+  const check = await axios
+    .post(authURL, JSON.stringify(data))
+    .then(() => true)
+    .catch(() => false);
+  if (check) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const getToken = async (username, password) => {
   const data = {
     username,

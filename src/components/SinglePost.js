@@ -1,4 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import uuid from 'react-uuid';
 import { Author } from './Author';
 import { Comments } from './Comments';
@@ -8,7 +9,8 @@ import { AppNavbar } from '../views/AppNavbar';
 import { sendTime, getComments } from '../config';
 import '../styles/SinglePost.css';
 
-export const SinglePost = props => {
+export const SinglePost = () => {
+  const location = useLocation();
   const {
     title,
     thumbnail,
@@ -17,7 +19,7 @@ export const SinglePost = props => {
     date,
     id,
     token
-  } = props.location.state;
+  } = location.state;
 
   const [commentsList, setCommentsList] = useState([]);
 

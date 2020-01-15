@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
+import { myStorage } from '../config/sessionStorage';
 import { Context } from '../context';
 import { Row, Col, DropdownItem } from 'reactstrap';
 import { PostList } from './PostList';
@@ -11,6 +12,7 @@ import { Pagination } from './Pagination';
 export const Posts = () => {
   const [state, setState] = useContext(Context);
   const { token, currentPage, posts, totalPages } = state;
+  console.log(token);
 
   const [viewOptions, setViewOptions] = useState(true);
 

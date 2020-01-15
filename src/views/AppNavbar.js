@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { myStorage } from '../config/sessionStorage';
+import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Row, Col } from 'reactstrap';
 
 import '../styles/AppNavbar.css';
 
 export const AppNavbar = () => {
+  const [state, setState] = useContext(Context);
+  const initialState = {
+    dashboard: false,
+    posts: [],
+    token: '',
+    currentPage: 1,
+    totalPages: { totalPages: 10 }
+  };
+
+  const resetContext = () => {
+    setState(initialState);
+    myStorage.setItem('token', '');
+  };
+
   return (
     <Row>
       <Navbar>
@@ -26,7 +42,9 @@ export const AppNavbar = () => {
           </Col>
           <Col>
             <NavItem>
-              <Link to='/auth'>Logout</Link>
+              <Link onClick={resetContext} to='/'>
+                Logout
+              </Link>
             </NavItem>
           </Col>
         </Nav>
