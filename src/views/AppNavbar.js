@@ -27,12 +27,12 @@ export const AppNavbar = () => {
         <Nav>
           <Col>
             <NavItem>
-              <img alt='img'></img>
+              <img alt="img"></img>
             </NavItem>
           </Col>
           <Col>
             <NavItem>
-              <Link to='/'>Home</Link>
+              <Link to="/">Home</Link>
             </NavItem>
           </Col>
           <Col sm={{ size: '8' }} md={{ size: '8' }}>
@@ -42,7 +42,7 @@ export const AppNavbar = () => {
           </Col>
           <Col>
             <NavItem>
-              <Link onClick={resetContext} to='/'>
+              <Link onClick={resetContext} to="/">
                 Logout
               </Link>
             </NavItem>

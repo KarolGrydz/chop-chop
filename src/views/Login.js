@@ -13,8 +13,6 @@ export const Login = () => {
   const [passWrong, setPassWrong] = useState(true);
   const [nameWrong, setNameWrong] = useState(true);
 
-  console.log(password);
-
   const userInput = e => {
     setUserName(e.target.value);
   };
@@ -45,17 +43,17 @@ export const Login = () => {
   };
 
   return (
-    <Row className='justify-content-center'>
+    <Row className="justify-content-center">
       <Col sm={{ size: 'auto' }} md={{ size: 'auto' }}>
         <h2>Simple Web App</h2>
-        <div className='login'>
+        <div className="login">
           <Form>
             <FormGroup>
               <Input
-                type='text'
-                name='username'
-                id='username'
-                placeholder='Username'
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username"
                 onChange={userInput}
                 invalid={nameWrong ? null : true}
               />
@@ -63,10 +61,10 @@ export const Login = () => {
             </FormGroup>
             <FormGroup>
               <Input
-                type='password'
-                name='password'
-                id='password'
-                placeholder='Password'
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
                 onChange={passInput}
                 invalid={passWrong ? null : true}
               />
@@ -75,7 +73,7 @@ export const Login = () => {
             <Link
               to={passWrong && nameWrong ? '/' : null}
               onClick={submit}
-              className='btn btn-primary'
+              className="btn btn-primary"
             >
               Login
             </Link>

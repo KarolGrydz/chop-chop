@@ -23,28 +23,24 @@ export const App = () => {
     <Router>
       <Container fluid={true}>
         <Switch>
-          <Route exact path='/' exact component={Dashboard} />
-          <Route exact path='/auth' component={Login} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/auth" component={Login} />
           <Route
+            path="/posts"
             exact
-            path='/posts'
-            exact
-            render={() => (dashboard ? <Posts /> : <Redirect to='/' />)}
+            render={() => (dashboard ? <Posts /> : <Redirect to="/" />)}
           />
           <Route
-            exact
-            path='/posts/:id'
-            render={() => (dashboard ? <SinglePost /> : <Redirect to='/' />)}
+            path="/posts/:id"
+            render={() => (dashboard ? <SinglePost /> : <Redirect to="/" />)}
           />
           <Route
-            exact
-            path='/posts/:id/AddComment'
-            render={() => (dashboard ? <AddComment /> : <Redirect to='/' />)}
+            path="/posts/:id/AddComment"
+            render={() => (dashboard ? <AddComment /> : <Redirect to="/" />)}
           />
           <Route
-            exact
-            path='/author/:id'
-            render={() => (dashboard ? <Author /> : <Redirect to='/' />)}
+            path="/author/:id"
+            render={() => (dashboard ? <Author /> : <Redirect to="/" />)}
           />
         </Switch>
       </Container>
